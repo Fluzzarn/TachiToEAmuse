@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		05E326042AC3B58800F58434 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E326032AC3B58800F58434 /* main.swift */; };
+		05E3260C2AC3B6D700F58434 /* PersonalBest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E3260B2AC3B6D700F58434 /* PersonalBest.swift */; };
+		05E3260D2AC3B92F00F58434 /* data.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 05E3260A2AC3B63700F58434 /* data.json */; };
+		05E3260F2AC3BB9F00F58434 /* eAmusePB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E3260E2AC3BB9F00F58434 /* eAmusePB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -17,6 +20,7 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
+				05E3260D2AC3B92F00F58434 /* data.json in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -25,6 +29,10 @@
 /* Begin PBXFileReference section */
 		05E326002AC3B58800F58434 /* tachiToeAmuse */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tachiToeAmuse; sourceTree = BUILT_PRODUCTS_DIR; };
 		05E326032AC3B58800F58434 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		05E3260A2AC3B63700F58434 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		05E3260B2AC3B6D700F58434 /* PersonalBest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalBest.swift; sourceTree = "<group>"; };
+		05E3260E2AC3BB9F00F58434 /* eAmusePB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eAmusePB.swift; sourceTree = "<group>"; };
+		05E326102AC3C2AC00F58434 /* data2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data2.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +65,11 @@
 		05E326022AC3B58800F58434 /* tachiToeAmuse */ = {
 			isa = PBXGroup;
 			children = (
+				05E326102AC3C2AC00F58434 /* data2.json */,
 				05E326032AC3B58800F58434 /* main.swift */,
+				05E3260A2AC3B63700F58434 /* data.json */,
+				05E3260B2AC3B6D700F58434 /* PersonalBest.swift */,
+				05E3260E2AC3BB9F00F58434 /* eAmusePB.swift */,
 			);
 			path = tachiToeAmuse;
 			sourceTree = "<group>";
@@ -121,6 +133,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				05E326042AC3B58800F58434 /* main.swift in Sources */,
+				05E3260F2AC3BB9F00F58434 /* eAmusePB.swift in Sources */,
+				05E3260C2AC3B6D700F58434 /* PersonalBest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +262,7 @@
 		05E326082AC3B58800F58434 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AN4TU9BL62;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -259,6 +274,7 @@
 		05E326092AC3B58800F58434 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AN4TU9BL62;
 				ENABLE_HARDENED_RUNTIME = YES;
