@@ -4,11 +4,20 @@
 //
 //  Created by Dan Mclean on 9/26/23.
 //
-
+import CSV
 import Foundation
+#if os(macOS)
 import TabularData
+#endif
 
+
+
+if CommandLine.arguments.count == 1 {
+    print("Please run this by passing in a .json file of your tachi PB's")
+    exit(0)
+}
 print("Loading File")
+
 let filePath = CommandLine.arguments[1]
 let url = URL(fileURLWithPath: filePath)
 do {
@@ -19,13 +28,17 @@ do {
         pb.scoreData?.scoreDataOptional?.exScore != nil
     }
     for pb in filtered {
-        print("\(pb.related?.song?.title! ?? ""): \(pb.scoreData?.scoreDataOptional?.exScore! ?? 0)")
+        print("\(pb.related?.song?.title! ?? "") \(difficultyConversion(diff: pb.related?.chart?.difficulty?.uppercased() ?? "")): \(pb.scoreData?.scoreDataOptional?.exScore! ?? 0)")
     }
     var eamusePbs:[eAmusePB] = []
     for pb in decodedStruct {
         let exScore = pb.scoreData?.scoreDataOptional?.exScore ?? 0
         let score = pb.scoreData?.score
-        let title = pb.related?.song?.title
+        var title = pb.related?.song?.title
+                /// Thanks Camellia
+        if title == "* Erm, could it be a Spatiotemporal ShockWAVE Syndrome...?" {
+            title = "* Erm， could it be a Spatiotemporal ShockWAVE Syndrome...?"
+        }
         let lamp = pb.scoreData?.lamp?.replacingOccurrences(of: "CLEAR", with: "COMPLETE", options: .caseInsensitive, range:nil) ?? "PLAYED"
         let scoreGrade = pb.scoreData?.grade ?? "F"
         let levelNum = pb.related?.chart?.levelNum ?? 0
@@ -37,7 +50,9 @@ do {
         eamusePbs.append(newItem)
         
     }
-    
+    let stream = OutputStream(toFileAtPath: "output.csv", append: false)!
+    let csv = try! CSVWriter(stream: stream)
+    #if os(macOS)
     var dataFrame = DataFrame()
     dataFrame.append(column: Column(name: "楽曲名", contents: eamusePbs.map({$0.title})))
     dataFrame.append(column: Column(name: "難易度", contents: eamusePbs.map({$0.difficulty
@@ -63,6 +78,15 @@ do {
     print("\(dataFrame)")
     
     try dataFrame.writeCSV(to: FileManager.default.homeDirectoryForCurrentUser.appending(component: "scores.csv")   )
+    #endif
+
+    try! csv.write(row: ["楽曲名", "難易度", "楽曲レベル", "クリアランク", "スコアグレード", "ハイスコア", "EXスコア", "プレー回数", "クリア回数", "ULTIMATE CHAIN", "PERFECT"])
+    for pb in eamusePbs {
+        try! csv.write(row: [pb.title,pb.difficulty, "\(pb.level)", pb.clearRank, pb.scoreGrade, "\(pb.hiScore)", "\(pb.exScore)", "\(pb.playCount)", "\(pb.clearAmound)", "\(pb.ultimateChain)", "\(pb.perfect)"])
+    }
+    csv.stream.close()
+    print("Done")
+
 } catch {print(error)}
 
 
